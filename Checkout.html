@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Shopping Basket & Checkout</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #0a1a2f;
+        color: #fff;
+        margin: 0;
+        padding: 20px;
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .basket-item {
+        background: #14213d;
+        padding: 15px;
+        margin-bottom: 15px;
+        border-radius: 8px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .basket-item h3 {
+        margin-bottom: 5px;
+    }
+
+    .quantity-controls button {
+        background: #ff7aa2;
+        border: none;
+        padding: 5px 10px;
+        margin: 0 5px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .quantity-controls button:hover {
+        background: #ff94b6;
+    }
+
+    .remove-btn {
+        background: #e63946;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 5px;
+        cursor: pointer;
+        color: white;
+        font-weight: bold;
+    }
+
+    .remove-btn:hover {
+        background: #ff4d5a;
+    }
+
+    .total {
+        font-size: 1.4rem;
+        text-align: center;
+        margin-top: 20px;
+        font-weight: bold;
+    }
+
+    .checkout-btn {
+        display: block;
+        margin: 20px auto;
+        padding: 12px 25px;
+        background: #ff7aa2;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+        color: #0f1220;
+        font-size: 1rem;
+    }
+
+    .checkout-btn:hover {
+        background: #ff94b6;
+    }
+
+    /* Checkout form */
+    #checkout-section {
+        display: none;
+        background: #14213d;
+        padding: 20px;
+        border-radius: 10px;
+        margin-top: 30px;
+    }
+
+    input, select {
+        width: 100%;
+        padding: 10px;
+        margin: 8px 0;
+        border-radius: 5px;
+        border: none;
+    }
+
+    .pay-btn {
+        width: 100%;
+        padding: 12px;
+        background: #ff7aa2;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+        color: #0f1220;
+        margin-top: 10px;
+    }
+
+    .pay-btn:hover {
+        background: #ff94b6;
+    }
+</style>
+</head>
+
+<body>
+
+<section id="basket-section">
+    <h2>Your Shopping Basket</h2>
+
+    <div class="basket-item">
+        <div>
+            <h3>Ice Coventry Hoodie</h3>
+            <p>Quantity:
+                <span class="quantity-controls">
+                    <button class="decrease-btn">-</button>
+                    <span class="quantity">1</span>
+                    <button class="increase-btn">+</button>
+                </span>
+            </p>
+            <p class="price">Price: £25.00</p>
+        </div>
+        <button class="remove-btn">Remove</button>
+    </div>
+
+    <div class="basket-item">
+        <div>
+            <h3>Ice Coventry T-Shirt</h3>
+            <p>Quantity:
+                <span class="quantity-controls">
+                    <button class="decrease-btn">-</button>
+                    <span class="quantity">2</span>
+                    <button class="increase-btn">+</button>
+                </span>
+            </p>
+            <p class="price">Price: £25.00</p>
+        </div>
+        <button class="remove-btn">Remove</button>
+    </div>
+
+    <div class="basket-item">
+        <div>
+            <h3>Ice Coventry Mug</h3>
+            <p>Quantity:
+                <span class="quantity-controls">
+                    <button class="decrease-btn">-</button>
+                    <span class="quantity">2</span>
+                    <button class="increase-btn">+</button>
+                </span>
+            </p>
+            <p class="price">Price: £15.00</p>
+        </div>
+        <button class="remove-btn">Remove</button>
+    </div>
+
+    <div class="total">Total: £0.00</div>
+
+    <button class="checkout-btn">Proceed to Checkout</button>
+</section>
+
+<!-- ✅ CHECKOUT SECTION -->
+<section id="checkout-section">
+    <h2>Checkout</h2>
+
+    <label>Full Name</label>
+    <input type="text" placeholder="Enter your full name" required>
+
+    <label>Email Address</label>
+    <input type="email" placeholder="Enter your email" required>
+
+    <label>Address</label>
+    <input type="text" placeholder="Street Address" required>
+    <input type="text" placeholder="City" required>
+    <input type="text" placeholder="Postcode" required>
+
+    <label>Payment Method</label>
+    <select>
+        <option>Credit/Debit Card</option>
+        <option>PayPal</option>
+        <option>Apple Pay</option>
+    </select>
+
+    <label>Card Number</label>
+    <input type="text" placeholder="1234 5678 9012 3456">
+
+    <label>Expiry Date</label>
+    <input type="text" placeholder="MM/YY">
+
+    <label>CVV</label>
+    <input type="text" placeholder="123">
+
+    <button class="pay-btn">Pay Now</button>
+</section>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const totalDisplay = document.querySelector(".total");
+    const checkoutBtn = document.querySelector(".checkout-btn");
+    const basketSection = document.getElementById("basket-section");
+    const checkoutSection = document.getElementById("checkout-section");
+
+    function updateTotal() {
+        let total = 0;
+        document.querySelectorAll(".basket-item").forEach(item => {
+            const price = parseFloat(item.querySelector(".price").textContent.replace("Price: £", ""));
+            const quantity = parseInt(item.querySelector(".quantity").textContent);
+            total += price * quantity;
+        });
+        totalDisplay.textContent = `Total: £${total.toFixed(2)}`;
+    }
+
+    document.querySelectorAll(".basket-item").forEach(item => {
+        const quantitySpan = item.querySelector(".quantity");
+        const decreaseBtn = item.querySelector(".decrease-btn");
+        const increaseBtn = item.querySelector(".increase-btn");
+        const removeBtn = item.querySelector(".remove-btn");
+
+        decreaseBtn.addEventListener("click", () => {
+            let qty = parseInt(quantitySpan.textContent);
+            if (qty > 1) {
+                quantitySpan.textContent = qty - 1;
+                updateTotal();
+            }
+        });
+
+        increaseBtn.addEventListener("click", () => {
+            let qty = parseInt(quantitySpan.textContent);
+            quantitySpan.textContent = qty + 1;
+            updateTotal();
+        });
+
+        removeBtn.addEventListener("click", () => {
+            item.remove();
+            updateTotal();
+        });
+    });
+
+    checkoutBtn.addEventListener("click", () => {
+        basketSection.style.display = "none";
+        checkoutSection.style.display = "block";
+    });
+
+    updateTotal();
+});
+</script>
+
+</body>
+</html>
