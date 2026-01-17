@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Ice Coventry</title>
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="Picture1.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- SEO -->
+  <meta name="description" content="Ice Coventry - Competitions, events, and entertainment in Coventry. Join or watch exciting experiences.">
+  <!-- External stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    /* Reset & base styles */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: radial-gradient(circle at center, #0a1a2f, #000814);
+      color: #e9ecff;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* Navigation */
+    nav {
+      background-color: #161a2e;
+      text-align: center;
+      padding: 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    nav a {
+      color: white;
+      margin: 10px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover { color: #ff7aa2; }
+    nav form { display: inline; }
+    nav input[type="text"] {
+      margin-left: 10px;
+      padding: 5px;
+      border-radius: 5px;
+      border: none;
+      max-width: 160px;
+    }
+    nav button {
+      padding: 5px 10px;
+      border: none;
+      border-radius: 5px;
+      background: #ff7aa2;
+      color: #0f1220;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    nav button:hover { background: #ff94b6; }
+
+    /* Hero */
+    .hero {
+      background: radial-gradient(circle at top right, #6c7cff 0%, #0f1220 100%);
+      text-align: center;
+      padding: 4rem 1rem;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+    .hero h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+    .hero p { font-size: 1.2rem; margin-bottom: 2rem; }
+    .btn {
+      background-color: #ff7aa2;
+      color: #0f1220;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    .btn:hover { background-color: #ff94b6; }
+
+    /* Event Grid Layout */
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin: 40px auto;
+      max-width: 1200px;
+      padding: 0 1rem;
+    }
+    .box {
+      background: #344399;
+      border-radius: 16px;
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      text-decoration: none;
+      color: #ffffff;
+      transition: transform 0.3s, box-shadow 0.3s;
+      overflow: hidden;
+    }
+    .box img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-top-left-radius: 16px;
+      border-top-right-radius: 16px;
+    }
+    .box h3 {
+      margin: 1rem 0 0.5rem;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+    .box p {
+      font-size: 1rem;
+      padding: 0 1rem 1.5rem;
+      color: #d1d1d1;
+    }
+    .box:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Footer */
+    footer {
+      background-color: #121634;
+      padding: 2rem 1rem;
+      text-align: center;
+      margin-top: 2rem;
+    }
+    footer .social-links { margin-top: 1rem; }
+    footer .social-links a {
+      margin: 0 0.5rem;
+      color: #6c7cff;
+      text-decoration: none;
+    }
+    footer .social-links a:hover { color: #ff7aa2; }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <a href="Home.html">Home</a>
+    <a href="Sign In.html">Sign up / Sign in</a>
+    <a href="About Us.html">About</a>
+    <a href="Contacts.html">Contacts</a>
+    <a href="Shop.html">Shop</a>
+    <form action="search.html" method="get">
+      <input type="text" name="q" placeholder="Search.." aria-label="Search">
+      <button type="submit">Go</button>
+    </form>
+  </nav>
+
+  <!-- Hero Section -->
+  <main>
+    <section class="hero">
+      <h1>Welcome to Ice Coventry</h1>
+      <p>Join exciting competitions and events. Win or lose, enjoy the experience!</p>
+    </section>
+
+    <!-- Event Cards -->
+    <div class="container">
+      <a href="gaming-competition.html" class="box">
+        <img src="https://image.api.playstation.com/vulcan/ap/rnd/202506/2509/b8f95044ba911cdd537d5b29a22cc79719f48ae281dda353.jpg"  loading="lazy">
+        <h3>Gaming Competition</h3>
+      </a>
+      <a href="fashion-competition.html" class="box">
+        <img src="https://tse1.mm.bing.net/th/id/OIP.rYIKNVyuEw6yalkhwUm_2gHaE3?cb=ucfimg2&ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3"  loading="lazy">
+        <h3>Fashion Competition</h3>
+      </a>
+      <a href="entertainment.html" class="box">
+        <img src="https://yt3.ggpht.com/a/AATXAJxGsEo5KtwGmIpSTMRSgD7AuIERBAkQJDX4Ig=s900-c-k-c0xffffffff-no-rj-mo"  loading="lazy">
+        <h3>Entertainment Competition</h3>
+      </a>
+      <a href="creative-competition.html" class="box">
+        <img src="https://tse1.mm.bing.net/th/id/OIP.Y-MgVBbDW0nLhvXL0Cao_AHaE8?cb=ucfimg2&ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3"  loading="lazy">
+        <h3>Creative Competition</h3>
+      </a>
+      <a href="sports-competition.html" class="box">
+        <img src="https://tse3.mm.bing.net/th/id/OIP.WrPwwMeJAHjoYZyC99yfogHaFj?cb=ucfimg2&ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3"  loading="lazy">
+        <h3>Sports Competition</h3>
+      </a>
+    </div>
+
+    <!-- Event Info -->
+    <p style="text-align:center; margin-top:40px;">
+      <b>JOIN IN EVENTS: WIN OR LOSE! (CHANCE TO SEE INFLUENCERS IF YOU WIN!)</b>
+    </p>
+    <p style="text-align:center"><em>Or enjoy all events by watching them</em></p>
+
+    <!-- Video -->
+    <video width="720" height="400" controls autoplay muted loop style="display: block; margin: 20px auto; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);" aria-label="Promotional trailer for Ice Coventry events">
+      <source src="Trailer.mp4" type="video/mp4">
+      <p>This is a promotional trailer for upcoming Ice Coventry events. Your browser does not support the video tag.</p>
+    </video>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Ice Coventry. All rights reserved.</p>
+    <div class="social-links">
+      <a href="https://facebook.com">Facebook</a>
+      <a href="https://instagram.com">Instagram</a>
+      <a href="https://twitter.com">Twitter</a>
+    </div>
+  </footer>
+
+</body>
+</html>

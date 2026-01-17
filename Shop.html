@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Ice Coventry – Events & Shop</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+  #confirmation-section {
+  text-align: center;
+}
+
+
+  .btn-large.primary {
+  display: inline-block;
+  padding: 12px 24px;
+  background: #007bff;
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+  :root {
+    --bg-main: #0a1a2f;
+    --bg-card: #1a1f3d;
+    --bg-nav: #161a2e;
+    --accent: #ff7aa2;
+    --accent-soft: #6c7cff;
+    --danger: #e63946;
+    --text-main: #e9ecff;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background: radial-gradient(circle, #0a1a2f, #000814);
+    color: var(--text-main);
+    margin: 0;
+  }
+
+  /* Nav */
+  nav {
+    background: var(--bg-nav);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.8rem 1.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  nav .logo {
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: white;
+  }
+
+  nav .nav-links a {
+    color: white;
+    margin: 0 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding-bottom: 3px;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+  }
+
+  nav .nav-links a.active {
+    border-bottom-color: var(--accent);
+    color: var(--accent);
+  }
+
+  nav .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  nav button {
+    background: var(--accent-soft);
+    border: none;
+    color: white;
+    padding: 0.4rem 0.8rem;
+    border-radius: 999px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85rem;
+  }
+
+  nav button:hover {
+    background: var(--accent);
+  }
+
+  main {
+    padding: 1.5rem 1.5rem 3rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  h2 {
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .subtitle {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #b4b9ff;
+    font-size: 0.95rem;
+  }
+
+  section {
+    margin-bottom: 2.5rem;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  /* Grid cards */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
+    gap: 1.5rem;
+  }
+
+  .card {
+    background: var(--bg-card);
+    padding: 1.3rem;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(255,122,162,0.2);
+    color: var(--accent);
+    padding: 3px 8px;
+    border-radius: 999px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .card img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 0.7rem;
+    object-fit: cover;
+    max-height: 140px;
+  }
+
+  .card h3 {
+    margin: 0.4rem 0;
+    color: var(--accent);
+    font-size: 1.05rem;
+  }
+
+  .card p {
+    margin: 0.15rem 0;
+    font-size: 0.9rem;
+  }
+
+  .price {
+    font-weight: 700;
+    color: var(--accent-soft);
+    margin-top: 0.4rem;
+  }
+
+  .card button {
+    margin-top: 0.7rem;
+    padding: 0.55rem 1.1rem;
+    border: none;
+    border-radius: 999px;
+    background: var(--accent-soft);
+    color: white;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  .card button:hover {
+    background: var(--accent);
+  }
+
+  /* Slide-in basket (overlay from LEFT) */
+  .basket-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    display: none;
+    z-index: 100;
+  }
+
+  .basket-overlay.active {
+    display: block;
+  }
+
+  .basket-panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: min(360px, 90%);
+    height: 100%;
+    background: #101426;
+    box-shadow: 4px 0 16px rgba(0,0,0,0.6);
+    transform: translateX(-100%);
+    transition: transform 0.26s ease-out;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .basket-overlay.active .basket-panel {
+    transform: translateX(0);
+  }
+
+  .basket-header {
+    padding: 1rem 1.1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .basket-header h3 {
+    margin: 0;
+    font-size: 1.1rem;
+  }
+
+  .basket-close {
+    background: transparent;
+    border: none;
+    color: #ccc;
+    font-size: 1.2rem;
+    cursor: pointer;
+  }
+
+  .basket-body {
+    padding: 0.8rem 1rem 1rem;
+    flex: 1;
+    overflow-y: auto;
+  }
+
+  .basket-footer {
+    padding: 0.8rem 1rem 1.1rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    background: #0b0f1f;
+  }
+
+  .basket-item {
+    background: #161a30;
+    padding: 0.6rem 0.7rem;
+    border-radius: 8px;
+    margin-bottom: 0.6rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .basket-item-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  .basket-item-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.8rem;
+  }
+
+  .basket-item button {
+    background: var(--accent-soft);
+    border: none;
+    color: white;
+    padding: 0.1rem 0.45rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.75rem;
+  }
+
+  .basket-item button:hover {
+    background: var(--accent);
+  }
+
+  .remove-btn {
+    background: var(--danger) !important;
+  }
+
+  .basket-total-line {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+  }
+
+  .basket-footer button {
+    width: 100%;
+    padding: 0.6rem 0.8rem;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #101426;
+  }
+
+  .btn-primary:hover {
+    background: #ff94b6;
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: #e9ecff;
+    border: 1px solid rgba(255,255,255,0.25);
+    margin-top: 0.35rem;
+  }
+
+  .btn-secondary:hover {
+    background: rgba(255,255,255,0.06);
+  }
+
+  /* Checkout & confirmation */
+  #checkout-section, #confirmation-section {
+    background: rgba(16,20,38,0.9);
+    padding: 1.5rem;
+    border-radius: 14px;
+    box-shadow: 0 10px 26px rgba(0,0,0,0.7);
+  }
+
+  input, select {
+    width: 100%;
+    padding: 0.6rem 0.7rem;
+    margin: 0.3rem 0 0.7rem;
+    border-radius: 8px;
+    border: none;
+    background: #0f1424;
+    color: #e9ecff;
+  }
+
+  .summary-box {
+    background:#1b2442;
+    padding: 0.9rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+  }
+
+  .summary-box h3 {
+    margin-top: 0;
+    margin-bottom: 0.4rem;
+  }
+
+  .btn-large {
+    width: 100%;
+    margin-top: 0.4rem;
+    padding: 0.75rem;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+
+  .btn-large.primary {
+    background: var(--accent);
+    color: #101426;
+  }
+
+  .btn-large.primary:hover {
+    background: #ff94b6;
+  }
+
+  .btn-large.ghost {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #e9ecff;
+  }
+
+  .btn-large.ghost:hover {
+    background: rgba(255,255,255,0.06);
+  }
+
+  @media (max-width: 600px) {
+    nav {
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    nav .nav-links {
+      width: 100%;
+      justify-content: center;
+      margin-top: 0.4rem;
+    }
+    main {
+      padding: 1rem 1rem 2.5rem;
+    }
+  }
+</style>
+</head>
+
+<body>
+
+<nav>
+  <div class="logo">Ice Coventry</div>
+
+  <div class="nav-links">
+    <a class="active" data-target="events-section">Events</a>
+    <a data-target="shop-section">Shop</a>
+    <a data-target="checkout-section">Checkout</a>
+  </div>
+
+  <div class="nav-actions">
+    <button id="basket-toggle-btn">Basket</button>
+  </div>
+</nav>
+
+<main>
+  <!-- EVENTS -->
+  <section id="events-section">
+    <h2>Events</h2>
+    <p class="subtitle">Book tickets for upcoming competitions and shows.</p>
+
+    <div class="grid">
+      <div class="card">
+        <span class="badge">Ticket</span>
+        <img src="https://via.placeholder.com/400x200?text=Gaming+Competition" alt="">
+        <h3>Gaming Competition</h3>
+        <p class="price">£25</p>
+        <button onclick="addEventToBasket('Gaming Competition', 25)">Book Tickets</button>
+      </div>
+
+      <div class="card">
+        <span class="badge">Ticket</span>
+        <img src="https://via.placeholder.com/400x200?text=Creative+Competition" alt="">
+        <h3>Creative Competition</h3>
+        <p class="price">£20</p>
+        <button onclick="addEventToBasket('Creative Competition', 20)">Book Tickets</button>
+      </div>
+
+      <div class="card">
+        <span class="badge">Ticket</span>
+        <img src="https://via.placeholder.com/400x200?text=Entertainment+Show" alt="">
+        <h3>Entertainment</h3>
+        <p>Every weekend</p>
+        <p class="price">£15</p>
+        <button onclick="addEventToBasket('Entertainment', 15)">Book Tickets</button>
+      </div>
+
+      <div class="card">
+        <span class="badge">Ticket</span>
+        <img src="https://via.placeholder.com/400x200?text=Sports+Competition" alt="">
+        <h3>Sports Competition</h3>
+        <p class="price">£30</p>
+        <button onclick="addEventToBasket('Sports Competition', 30)">Book Tickets</button>
+      </div>
+
+      <div class="card">
+        <span class="badge">Ticket</span>
+        <img src="https://via.placeholder.com/400x200?text=Fashion+Competition" alt="">
+        <h3>Fashion Competition</h3>
+        <p class="price">£40</p>
+        <button onclick="addEventToBasket('Fashion Competition', 40)">Book Tickets</button>
+      </div>
+    
+
+  </section>
+
+
+  <!-- SHOP -->
+  <section id="shop-section" class="hidden">
+    <h2>Shop</h2>
+    <p class="subtitle">Grab your Ice Coventry merch and beverages</p>
+
+    <div class="grid">
+      <div class="card">
+        <span class="badge">Merch</span>
+        <img src="https://via.placeholder.com/400x200?text=Hoodie" alt="">
+        <h3>Ice Coventry Hoodie</h3>
+        <p>Comfortable and stylish hoodie with logo.</p>
+        <p class="price">£25</p>
+        <button onclick="addToBasket('Ice Coventry Hoodie', 25)">Add to Basket</button>
+      </div>
+
+      <div class="card">
+        <span class="badge">Merch</span>
+        <img src="https://via.placeholder.com/400x200?text=T-Shirt" alt="">
+        <h3>Ice Coventry T‑Shirt</h3>
+        <p>Classic tee for everyday wear.</p>
+        <p class="price">£20</p>
+        <button onclick="addToBasket('Ice Coventry T‑Shirt', 20)">Add to Basket</button>
+      </div>
+
+      <div class="card">
+        <span class="badge">Merch</span>
+        <img src="https://via.placeholder.com/400x200?text=Mug" alt="">
+        <h3>Ice Coventry Mug</h3>
+        <p>Perfect for hot drinks while gaming.</p>
+        <p class="price">£10</p>
+        <button onclick="addToBasket('Ice Coventry Mug', 10)">Add to Basket</button>
+      </div>
+    </div>
+
+    <div class="card">
+        <span class="badge">Beverages</span>
+        <img src="https://via.placeholder.com/400x200?text=Mug" alt="">
+        <h3>Pizza 7''</h3>
+        <p class="price">£4.99</p>
+        <button onclick="addToBasket('Pizza', 4.99)">Add to Basket</button>
+      </div>
+    </div>
+
+    <div class="card">
+        <span class="badge">Beverages</span>
+        <img src="https://via.placeholder.com/400x200?text=Mug" alt="">
+        <h3>Cheesecake</h3>
+        <p class="price">£5.99</p>
+        <button onclick="addToBasket('Cheesecake', 5.99)">Add to Basket</button>
+      </div>
+    </div>
+
+    <div class="card">
+        <span class="badge">Beverages</span>
+        <img src="https://via.placeholder.com/400x200?text=Mug" alt="">
+        <h3>Ice Cream Tub</h3>
+        <p class="price">£6</p>
+        <button onclick="addToBasket('Ice Cream Tub', 6)">Add to Basket</button>
+      </div>
+
+      <div class="card">
+        <span class="badge">Beverages</span>
+        <img src="https://via.placeholder.com/400x200?text=Mug" alt="">
+        <h3>Soda</h3>
+        <p class="price">£1.99</p>
+        <button onclick="addToBasket('Soda', 1.99)">Add to Basket</button>
+      </div>
+
+      <div class="card">
+        <span class="badge">Beverages</span>
+        <img src="https://via.placeholder.com/400x200?text=Mug" alt="">
+        <h3>Chips and Burger/chicken</h3>
+        <p class="price">£7.99</p>
+        <button onclick="addToBasket('Chips and Burger', 7.99)">Add to Basket</button>
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <!-- CHECKOUT -->
+  <section id="checkout-section" class="hidden">
+    <h2>Checkout</h2>
+    <p class="subtitle">Review your order and enter your details.</p>
+
+    <div class="summary-box">
+      <h3>Order Summary</h3>
+      <p id="summary-items"></p>
+      <p id="summary-total"></p>
+    </div>
+
+    <input id="name" placeholder="Full Name">
+    <input id="email" placeholder="Email">
+    <input id="address" placeholder="Address">
+    <input id="city" placeholder="City">
+    <input id="postcode" placeholder="Postcode">
+
+    <select id="payment">
+      <option>Credit/Debit Card</option>
+      <option>PayPal</option>
+      <option>Apple Pay</option>
+    </select>
+
+    <input placeholder="Card Number">
+    <input placeholder="MM/YY">
+    <input placeholder="CVV">
+
+    <button class="btn-large primary" onclick="completeOrder()">Pay Now</button>
+    <button class="btn-large ghost" onclick="goBackToBasket()">Back to Basket</button>
+  </section>
+
+  <!-- CONFIRMATION -->
+  <section id="confirmation-section" class="hidden">
+    <h2>Order Confirmed ✅</h2>
+    <p class="subtitle">Your order has been placed successfully.</p>
+
+    <div class="summary-box">
+      <h3>Thank you, <span id="confirm-name"></span>!</h3>
+      <p id="confirm-items"></p>
+      <p id="confirm-total"></p>
+    </div>
+
+    <p>A confirmation email has been sent to <span id="confirm-email"></span>.</p>
+    <button class="btn-large primary" onclick="continueShopping()">Continue Shopping</button>
+    <a href="feedback.html" class="btn-large primary">Feedback</a>
+
+
+
+  </section>
+</main>
+
+<!-- SLIDE‑IN BASKET OVERLAY -->
+<div class="basket-overlay" id="basket-overlay">
+  <div class="basket-panel">
+    <div class="basket-header">
+      <h3>Your Basket</h3>
+      <button class="basket-close" id="basket-close-btn">&times;</button>
+    </div>
+    <div class="basket-body" id="basket-items"></div>
+    <div class="basket-footer">
+      <div class="basket-total-line">
+        <span>Total:</span>
+        <strong id="basket-total">£0.00</strong>
+      </div>
+      <button class="btn-primary" id="basket-checkout-btn">Checkout</button>
+      <button class="btn-secondary" id="basket-continue-btn">Continue Shopping</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  let basket = JSON.parse(localStorage.getItem("basket")) || [];
+
+  function saveBasket() {
+    localStorage.setItem("basket", JSON.stringify(basket));
+  }
+
+  function setActiveNav(targetId) {
+    document.querySelectorAll("nav .nav-links a").forEach(a => {
+      a.classList.toggle("active", a.dataset.target === targetId);
+    });
+  }
+
+  function showSection(id) {
+    document.querySelectorAll("main section").forEach(sec => {
+      sec.classList.add("hidden");
+    });
+    document.getElementById(id).classList.remove("hidden");
+    setActiveNav(id);
+  }
+
+  function addToBasket(name, price) {
+    const existing = basket.find(i => i.name === name);
+    if (existing) {
+      existing.quantity++;
+    } else {
+      basket.push({ name, price, quantity: 1 });
+    }
+    saveBasket();
+    renderBasket();
+    openBasket();
+  }
+
+  function addEventToBasket(eventName, price) {
+    addToBasket(eventName + " Ticket", price);
+  }
+
+  function renderBasket() {
+    const container = document.getElementById("basket-items");
+    container.innerHTML = "";
+
+    if (basket.length === 0) {
+      container.innerHTML = "<p>Your basket is empty.</p>";
+    } else {
+      basket.forEach((item, index) => {
+        const div = document.createElement("div");
+        div.className = "basket-item";
+        div.innerHTML = `
+          <div>
+            <div class="basket-item-title">${item.name}</div>
+            <div class="basket-item-controls">
+              <button onclick="changeQty(${index}, -1)">-</button>
+              <span>${item.quantity}</span>
+              <button onclick="changeQty(${index}, 1)">+</button>
+              <span>£${item.price}</span>
+            </div>
+          </div>
+          <button class="remove-btn" onclick="removeItem(${index})">X</button>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    updateTotal();
+  }
+
+  function updateTotal() {
+    const total = basket.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    document.getElementById("basket-total").textContent = `£${total.toFixed(2)}`;
+  }
+
+  function changeQty(index, amount) {
+    basket[index].quantity += amount;
+    if (basket[index].quantity < 1) basket[index].quantity = 1;
+    saveBasket();
+    renderBasket();
+  }
+
+  function removeItem(index) {
+    basket.splice(index, 1);
+    saveBasket();
+    renderBasket();
+  }
+
+  function openBasket() {
+    document.getElementById("basket-overlay").classList.add("active");
+  }
+
+  function closeBasket() {
+    document.getElementById("basket-overlay").classList.remove("active");
+  }
+
+  function goToCheckoutFromBasket() {
+    closeBasket();
+    updateCheckoutSummary();
+    showSection("checkout-section");
+  }
+
+  function updateCheckoutSummary() {
+    const itemsText = basket
+      .map(i => `${i.name} x${i.quantity} – £${(i.price * i.quantity).toFixed(2)}`)
+      .join("<br>");
+    const total = basket.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+    document.getElementById("summary-items").innerHTML = itemsText || "Your basket is empty.";
+    document.getElementById("summary-total").textContent = `Total: £${total.toFixed(2)}`;
+  }
+
+  function completeOrder() {
+    const name = document.getElementById("name").value || "Customer";
+    const email = document.getElementById("email").value || "your email";
+
+    document.getElementById("confirm-name").textContent = name;
+    document.getElementById("confirm-email").textContent = email;
+
+    const itemsText = basket
+      .map(i => `${i.name} x${i.quantity} – £${(i.price * i.quantity).toFixed(2)}`)
+      .join("<br>");
+    const total = basket.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+    document.getElementById("confirm-items").innerHTML = itemsText || "No items.";
+    document.getElementById("confirm-total").textContent = `Total paid: £${total.toFixed(2)}`;
+
+    basket = [];
+    saveBasket();
+    renderBasket();
+
+    showSection("confirmation-section");
+  }
+
+  function goBackToBasket() {
+    showSection("events-section");
+    openBasket();
+  }
+
+  function continueShopping() {
+    showSection("events-section");
+  }
+
+  document.querySelectorAll("nav .nav-links a").forEach(a => {
+    a.addEventListener("click", () => {
+      const target = a.dataset.target;
+      if (target === "checkout-section") {
+        updateCheckoutSummary();
+      }
+      showSection(target);
+    });
+  });
+
+  document.getElementById("basket-toggle-btn").addEventListener("click", () => {
+    if (basket.length === 0) {
+      openBasket();
+      renderBasket();
+    } else {
+      renderBasket();
+      openBasket();
+    }
+  });
+
+  document.getElementById("basket-close-btn").addEventListener("click", closeBasket);
+
+  document.getElementById("basket-checkout-btn").addEventListener("click", goToCheckoutFromBasket);
+
+  document.getElementById("basket-continue-btn").addEventListener("click", () => {
+    closeBasket();
+    continueShopping();
+  });
+
+  document.getElementById("basket-overlay").addEventListener("click", e => {
+    if (e.target.id === "basket-overlay") {
+      closeBasket();
+    }
+  });
+
+  renderBasket();
+</script>
+
+</body>
+</html>

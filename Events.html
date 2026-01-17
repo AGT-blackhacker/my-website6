@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Events</title>
+  <link rel="icon" type="image/jpg" href="Picture2.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { font-family:'Segoe UI',sans-serif; background:radial-gradient(circle,#0a1a2f,#000814); color:#e9ecff; margin:0; }
+    nav { background:#161a2e; text-align:center; padding:1rem; }
+    nav a { color:white; margin:10px; text-decoration:none; font-weight:bold; }
+    nav a:hover { color:#ff7aa2; }
+    .hero { background:radial-gradient(circle at top right,#6c7cff,#0f1220); text-align:center; padding:3rem 1rem; }
+    .hero h1 { font-size:2.5rem; margin-bottom:1rem; }
+    .events { padding:2rem; display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:1.5rem; }
+    .event-card { background:#1a1f3d; padding:1.5rem; border-radius:10px; text-align:center; box-shadow:0 4px 10px rgba(0,0,0,0.5); }
+    .event-card h3 { color:#ff7aa2; }
+    .event-card .price { font-weight:bold; color:#6c7cff; }
+    .event-card a button { margin-top:1rem; padding:0.7rem 1.2rem; border:none; border-radius:5px; background:#6c7cff; color:white; cursor:pointer; }
+    .event-card a button:hover { background:#ff7aa2; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="Home.html">Home</a>
+    <a href="Sign-in.html">Sign up / Sign in</a>
+    <a href="About Us.html">About Us</a>
+    <a href="Basket.html">Basket</a>
+    <a href="Contacts.html">Contacts</a>
+    <a href="Shop.html">Shop</a>
+  </nav>
+
+  <section class="hero">
+    <h1>Events</h1>
+    <p>Book your tickets for upcoming competitions and shows!</p>
+  </section>
+
+  <section class="events">
+    <div class="event-card">
+      <h3>Gaming Competition</h3>
+      <p>Date: November 15th, 2024</p>
+      <p class="price">£25</p>
+      <a href="Basket.html?event=Gaming%20Competition&price=25"><button>Book Tickets</button></a>
+    </div>
+    <div class="event-card">
+      <h3>Creative Competition</h3>
+      <p>Date: December 10th, 2024</p>
+      <p class="price">£20</p>
+      <a href="Basket.html?event=Creative%20Competition&price=20"><button>Book Tickets</button></a>
+    </div>
+    <div class="event-card">
+      <h3>Entertainment</h3>
+      <p>Every weekend</p>
+      <p class="price">£15</p>
+      <a href="Basket.html?event=Entertainment&price=15"><button>Book Tickets</button></a>
+    </div>
+    <div class="event-card">
+      <h3>Sports Competition</h3>
+      <p>Date: January 20th, 2025</p>
+      <p class="price">£30</p>
+      <a href="Basket.html?event=Sports%20Competition&price=30"><button>Book Tickets</button></a>
+    </div>
+    <div class="event-card">
+      <h3>Fashion Competition</h3>
+      <p>Date: February 14th, 2025</p>
+      <p class="price">£40</p>
+      <a href="Basket.html?event=Fashion%20Competition&price=40"><button>Book Tickets</button></a>
+    </div>
+  </section>
+
+</body>
+</html>

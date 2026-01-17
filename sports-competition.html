@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sports Competition</title>
+  <!-- Favicon -->
+  <link rel="icon" type="image/jpeg" href="Picture2.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- SEO -->
+  <meta name="description" content="Ice Coventry - Join thrilling gaming competitions and tournaments. Showcase your skills in various games and compete for top prizes. Or just come along to watch the action unfold!">
+  <!-- External stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Reset & base styles */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: radial-gradient(circle at center, #0a1a2f, #000814);
+      color: #e9ecff;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* Navigation */
+    nav {
+      background-color: #161a2e;
+      text-align: center;
+      padding: 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    nav a {
+      color: white;
+      margin: 10px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover { color: #ff7aa2; }
+    nav form { display: inline; }
+    nav input[type="text"] {
+      margin-left: 10px;
+      padding: 5px;
+      border-radius: 5px;
+      border: none;
+      max-width: 160px;
+    }
+    nav button {
+      padding: 5px 10px;
+      border: none;
+      border-radius: 5px;
+      background: #ff7aa2;
+      color: #0f1220;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    nav button:hover { background: #ff94b6; }
+
+    /* Header */
+    header {
+      text-align: center;
+      padding: 3rem 1rem;
+      background: linear-gradient(135deg, #1a1f3c, #0a1a2f);
+    }
+    header h1 {
+      font-size: 2.5rem;
+      color: #ff7aa2;
+      text-shadow: 2px 2px #0f1220;
+    }
+
+    /* Main content */
+    main { padding: 2rem; max-width: 900px; margin: auto; }
+    section { margin-bottom: 3rem; }
+    h2 { color: #ff7aa2; margin-bottom: 1rem; }
+    ul { list-style: none; }
+    ul li { margin: 0.5rem 0; }
+
+    button.cta {
+      padding: 10px 20px;
+      margin: 10px;
+      border: none;
+      border-radius: 5px;
+      background: #ff7aa2;
+      color: #0f1220;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button.cta:hover { background: #ff94b6; }
+
+    /* Gallery */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+    .gallery img {
+      width: 100%;
+      border-radius: 8px;
+      border: 2px solid #ff7aa2;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #161a2e;
+      color: #aaa;
+    }
+
+    /* Mobile */
+    @media (max-width: 600px) {
+      nav a { display: block; margin: 5px 0; }
+      nav form { display: block; margin-top: 10px; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="entertainment.html">Entertainment</a>
+    <a href="gaming-competition.html">Gaming</a>
+    <a href="fashion-competition.html">Fashion</a>
+    <a href="creative-competition.html">Creative</a>
+    <form action="search.html" method="get">
+      <input type="text" name="query" placeholder="Search...">
+      <button type="submit">Go</button>
+    </form>
+  </nav>
+
+  <header>
+    <h1>Sports Competition</h1>
+  </header>
+  <main>
+    <section>
+      <h2>About the Competition</h2>
+      <p>Join the Ice Coventry Sports Competition and showcase your athletic prowess! Whether you're a seasoned athlete or just starting out, this event is the perfect platform to display your talent and passion for sports.</p>
+    </section>
+    <section>
+      <h2>Upcoming Competitions</h2>
+      <ul>
+        <li>Football Championship - Jan 15</li>
+        <li>Basketball Tournament - Apr 22</li>
+        <li>Tennis Open - Sep 10</li>
+        <li>Swimming Gala - Dec 5</li>
+        <li>Cycling Challenge - Feb 18</li>
+        <li>Running Marathon - May 30</li>
+        <li>Volleyball Showdown - Nov 12</li>
+      </ul>
+      <p>  AND SO MUCH MORE </p>
+    </section>
+    <section>
+      <h2>How to Register</h2>
+      <p>To participate in the Ice Coventry Sports Competition, please buy a ticket and fill out the application form. Early bird discounts are available </p>
+      <button class="cta" onclick="window.location.href='Shop.html'">Register Now</button>
+    </section>
+    <section>
+      <div class="gallery">
+        <img src="https://www.safemoneyplaces.com/uploads/1/0/0/9/10093869/smn-article-sports_orig.jpg">
+        <img src="https://tse1.mm.bing.net/th/id/OIP.Nupho6VQwnHuBgigTLbD-wHaDo?rs=1&pid=ImgDetMain&o=7&rm=3">
+        <img src="https://tse3.mm.bing.net/th/id/OIP.NuwECK068xDK7C47j2I9rQHaEL?rs=1&pid=ImgDetMain&o=7&rm=3">
+        <img src="https://origin.ziggo.nl/content/dam/ziggo/products/televisie/ziggo-sport/1080x608_page-image_ziggosport-totaal_excl-logo.jpg">
+      </div>
+    </section>
+    <section>
+      <h2>Contact Us</h2>
+      <p>Email: info@icecoventry.com</p>
+      <p>Location: Ice Coventry Arena, Coventry, UK</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Ice Coventry Gaming Competition. All rights reserved.</p>
+  </footer>
+  
+</body>
+</html>

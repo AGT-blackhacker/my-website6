@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Ice Coventry - Sign In / Sign Up</title>
+  <link rel="icon" type="image/jpeg" href="Picture2.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: radial-gradient(circle at center, #0a1a2f, #000814);
+      color: #e9ecff;
+      margin: 0;
+      line-height: 1.6;
+    }
+    nav {
+      background:#161a2e;
+      text-align:center;
+      padding:1rem;
+    }
+    nav a {
+      color:white;
+      margin:10px;
+      text-decoration:none;
+      font-weight:bold;
+    }
+    nav a:hover { color:#ff7aa2; }
+
+    .hero {
+      background: radial-gradient(circle at top right, #6c7cff 0%, #0f1220 100%);
+      text-align:center; padding:3rem 1rem;
+    }
+    .hero h1 { font-size:2.5rem; margin-bottom:1rem; }
+
+    .form-container {
+      max-width:400px;
+      margin:2rem auto;
+      background:#161a2e;
+      padding:2rem;
+      border-radius:10px;
+      box-shadow:0 0 15px rgba(0,0,0,0.5);
+    }
+    .form-container h2 { text-align:center; margin-bottom:1rem; }
+    .form-container label {
+      display:block;
+      margin-bottom:0.5rem;
+      font-weight:bold;
+    }
+    .form-container input {
+      width:100%;
+      padding:10px;
+      margin-bottom:1rem;
+      border:none;
+      border-radius:5px;
+    }
+    .form-container button {
+      background:#ff7aa2;
+      color:#0f1220;
+      padding:0.75rem 1.5rem;
+      border:none;
+      border-radius:8px;
+      font-weight:bold;
+      cursor:pointer;
+      width:100%;
+    }
+    .form-container button:hover { background:#ff94b6; }
+
+    .toggle-link {
+      text-align:center;
+      margin-top:1rem;
+    }
+    .toggle-link a {
+      color:#ff7aa2;
+      cursor:pointer;
+      text-decoration:none;
+    }
+
+    /* Confirmation message */
+    .confirmation-message {
+      display:none;
+      text-align:center;
+      margin-top:1rem;
+      padding:1rem;
+      border-radius:8px;
+      font-weight:bold;
+      background:#0f1220;
+      border:2px solid #6c7cff;
+      color:#6c7cff;
+      opacity:0;
+      transition: opacity 0.5s ease;
+    }
+
+    footer {
+      background:#121634;
+      padding:1rem;
+      text-align:center;
+      margin-top:2rem;
+    }
+    footer a { color:#6c7cff; margin:0 10px; text-decoration:none; }
+    footer a:hover { color:#ff7aa2; }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <a href="Home.html">Home</a>
+    <a href="Sign In.html">Sign up / Sign in</a>
+    <a href="About Us.html">About</a>
+    <a href="Contacts.html">Contacts</a>
+    <a href="Shop.html">Shop</a>
+    <input type="text" placeholder="Search.." aria-label="Search site">
+  </nav>
+
+  <!-- Hero -->
+  <div class="hero">
+    <h1>Welcome to Ice Coventry</h1>
+    <p>Sign in to your account, create a new one, or reset your password below.</p>
+  </div>
+
+  <!-- Sign In Form -->
+  <section class="form-container" id="signin-form">
+    <h2>Sign In</h2>
+    <form>
+      <label for="signin-email">Email Address</label>
+      <input type="email" id="signin-email" name="email" required>
+
+      <label for="signin-password">Password</label>
+      <input type="password" id="signin-password" name="password" required>
+
+      <button type="submit">Sign In</button>
+    </form>
+    <p class="toggle-link">
+      <a onclick="showForm('signup-form')">Don’t have an account? Sign up here</a><br>
+      <a onclick="showForm('forgot-form')">Forgot Password?</a>
+    </p>
+  </section>
+
+  <!-- Sign Up Form -->
+  <section class="form-container" id="signup-form" style="display:none;">
+    <h2>Sign Up</h2>
+    <form>
+      <label for="signup-name">Full Name</label>
+      <input type="text" id="signup-name" name="name" required>
+
+      <label for="signup-email">Email Address</label>
+      <input type="email" id="signup-email" name="email" required>
+
+      <label for="signup-password">Password</label>
+      <input type="password" id="signup-password" name="password" required>
+
+      <label for="signup-confirm">Confirm Password</label>
+      <input type="password" id="signup-confirm" name="confirm-password" required>
+
+      <button type="submit">Create Account</button>
+    </form>
+    <p class="toggle-link">
+      <a onclick="showForm('signin-form')">Already have an account? Sign in here</a>
+    </p>
+  </section>
+
+  <!-- Forgot Password Form -->
+  <section class="form-container" id="forgot-form" style="display:none;">
+    <h2>Reset Password</h2>
+    <!-- Replace with your Formspree reset endpoint -->
+    <form id="forgotPasswordForm" action="https://formspree.io/f/yourResetFormID" method="POST">
+      <label for="forgot-email">Enter your Email Address</label>
+      <input type="email" id="forgot-email" name="email" required>
+
+      <button type="submit">Send Reset Link</button>
+    </form>
+    <div class="confirmation-message" id="resetConfirmation">
+      ✅ Reset link sent! Please check your email.
+    </div>
+    <p class="toggle-link">
+      <a onclick="showForm('signin-form')">Back to Sign In</a>
+    </p>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Ice Coventry. All rights reserved.</p>
+    <div>
+      <a href="https://facebook.com">Facebook</a>
+      <a href="https://instagram.com">Instagram</a>
+      <a href="https://twitter.com">Twitter</a>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    function showForm(formId) {
+      document.getElementById('signin-form').style.display = 'none';
+      document.getElementById('signup-form').style.display = 'none';
+      document.getElementById('forgot-form').style.display = 'none';
+      document.getElementById(formId).style.display = 'block';
+    }
+
+    // Forgot Password confirmation popup
+    const forgotForm = document.getElementById('forgotPasswordForm');
+    const resetConfirmation = document.getElementById('resetConfirmation');
+
+    forgotForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(forgotForm);
+      try {
+        const response = await fetch(forgotForm.action, {
+          method: 'POST',
+          body: formData,
+          headers: { 'Accept': 'application/json' }
+        });
+        if (response.ok) {
+          resetConfirmation.style.display = 'block';
+          resetConfirmation.style.opacity = '1';
+          forgotForm.reset();
+          setTimeout(() => {
+            resetConfirmation.style.opacity = '0';
+            setTimeout(() => { resetConfirmation.style.display = 'none'; }, 500);
+          }, 5000);
+        } else {
+          alert('Error: Unable to send reset link.');
+        }
+      } catch (error) {
+        alert('Network error. Please try again.');
+      }
+    });
+  </script>
+
+</body>
+</html>
